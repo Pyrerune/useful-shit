@@ -29,7 +29,7 @@ impl Reversed for Vec<String> {
 pub trait GameBoard {
     type Position;
     type Player;
-    fn available_positions(&self) -> Vec<Self::Position>;
+    fn available_positions(&self, player: i32) -> Vec<Self::Position>;
     fn check_winner(&mut self) -> Option<Self::Player>;
     fn give_reward(&mut self);
     fn reset(&mut self);
