@@ -1,5 +1,6 @@
 #![feature(string_remove_matches)]
-
+#[macro_use]
+use num_derive::FromPrimitive;
 use std::fmt::Debug;
 use std::str::FromStr;
 use std::io::{stdout, Write, stdin};
@@ -26,10 +27,16 @@ impl Reversed for Vec<String> {
         reversed_vec
     }
 }
+#[derive(Debug, Clone, Copy, PartialOrd, PartialEq, FromPrimitive)]
+pub enum Players {
+    WHITE = -1,
+    BLACK = 1,
+    NULL = 0,
+}
 pub trait GameBoard {
     type Position;
     type Player;
-    fn available_positions(&self, player: i32) -> Vec<Self::Position>;
+    fn available_positions(&self, player: Players) -> Vec<Self::Position>;
     fn check_winner(&mut self) -> Option<Self::Player>;
     fn give_reward(&mut self);
     fn reset(&mut self);
